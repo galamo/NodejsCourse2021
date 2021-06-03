@@ -9,7 +9,6 @@ async function getFromServer2() {
     console.log(6666)
     const result = await fetch("http://google.co.il")
     console.log(8888)
-
 }
 console.log(9999)
 getFromServer2()
