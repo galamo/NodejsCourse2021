@@ -19,7 +19,7 @@
 - `npm install -g typescript`
 - `npm install ts-node`
 - `npm install -g concurrently`
-
+- `npm install nodemon -g`
 `    "_run-all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,application\" -c \"red.bold,yellow.bold,\" \"npm run build_watch\" \"npm run dev\"",
 `
 

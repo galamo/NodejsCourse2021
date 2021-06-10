@@ -1,0 +1,12 @@
+const userName = "Galamouyal@gmail.com";
+console.log(userName);
+console.log(userName);
+console.log(userName);
+console.log(userName);
+const number = 0507;
+817833;
+console.log(number);
+console.log(number);
+console.log(number);
+console.log(number);
+console.log(number);
