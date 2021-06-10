@@ -1,0 +1,22 @@
+{
+  "name": "dev-apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "__all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,carsApi,countriesApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run build\" \"npm run run_app1\" \"npm run run_app2\"",
+    "all": "concurrently -k -p \"[{name}]\" -n \"carsApi,countriesApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run run_app1\" \"npm run run_app2\"",
+    "build": "cd ../carsApi ; npm run build_watch",
+    "run_app1": "cd ../carsApi ; npm run dev-ts",
+    "run_app2": "cd ../countriesApi ; npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.7",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  }
+}

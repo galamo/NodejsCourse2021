@@ -23,7 +23,11 @@
 `    "_run-all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,application\" -c \"red.bold,yellow.bold,\" \"npm run build_watch\" \"npm run dev\"",
 `
 
+# Express 
 
+- `npm install express`
+- `npm install @types/express @types/node --save-dev`
+- `npm install dotenv`
 
 
 
