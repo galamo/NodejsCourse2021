@@ -1,30 +1,60 @@
 import express from "express";
 import { getCars } from "../../controllers/cars";
+import joi from "joi";
 const carsRouter = express.Router();
 
-const handler = (req, res, next) => {
-    console.log("inside entry point ")
+const carsSchema = joi.object({
+    query: joi.object({
+        carType: joi.string().required()
+    })
+})
+const usersSchema = joi.object({
+    query: joi.object({
+        carType: joi.string().valid("aaa", "bbb").required()
+    })
+})
 
-    if (!req.query.carType) {
-        //@ts-ignore
-        req.isBadReuqest = true;
-        return next(new Error("missing param"))
+
+const schemas = {
+    "/cars": carsSchema,
+    "/users": usersSchema
+}
+
+
+function getSchemaValidation(path) {
+    const current = schemas[path]
+    return current
+}
+function validate(req, res, next) {
+    const schemaValidation = getSchemaValidation(req.baseUrl)
+    const { error } = schemaValidation.validate({ query: req.query });
+    if (error) {
+        return next(new Error(error.message))
     }
+    return next();
+}
+
+
+
+const handler = async (req, res, next) => {
+    console.log("inside entry point ")
+    // if (!req.query.carType) {
+    //     //@ts-ignore
+    //     req.isBadReuqest = true;
+    //     return next(new Error("missing param"))
+    // }
     return res.json(getCars())
 
 }
 
-function validate(req, res, next) {
-    console.log("inside validation")
-    next();
-}
+
 
 const entries = [
     {
         name: "carsEntry",
         path: "/",
         methodType: "get",
-        callbacks: [validate, validate, validate, handler]
+        callbacks: [validate, handler]
     },
     {
         name: "carsEntry",
