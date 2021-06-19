@@ -4,7 +4,8 @@
         "outDir": "dist",
         "target": "ES2015",
         "esModuleInterop": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "baseUrl": "src"
     },
     "include": [
         "./src"
