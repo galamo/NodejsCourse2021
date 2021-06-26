@@ -2,12 +2,21 @@ import express from "express"
 import * as dotenv from "dotenv"
 import { getRequestId } from "./utils/"
 import { carsRouter } from "./routes/cars/index"
+import https from "https";
+import fs from "fs";
+
+var privateKey = fs.readFileSync('ssl/server.key', 'utf8');
+var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
+var credentials = { key: privateKey, cert: certificate };
+
+
 dotenv.config();
 
 const { logger } = require("./logger")
 
 logger.info({ message: "starting application" })
 const app = express();
+var httpsServer = https.createServer(credentials, app);
 
 app.use(getRequestId);
 
@@ -20,4 +29,4 @@ app.use((error, req: any,
 })
 
 app.listen(process.env.PORT);
-
+httpsServer.listen(4433)
