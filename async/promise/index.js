@@ -14,7 +14,7 @@ function getCarsFromServer(param) {
 // getCarsFromServer(1).then(res => console.log(res)).catch(err => console.log(err))
 
 
-async function getCountries() {
+ function getCountries() {
     return new Promise((resolve, reject) => {
         axios.get("https://restcountries.eu/rest/v2/all").then(result => {
             // console.log(result.data[0].flag)

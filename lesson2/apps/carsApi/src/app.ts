@@ -4,13 +4,16 @@ import { getRequestId } from "./utils/"
 import { carsRouter } from "./routes/cars/index"
 import https from "https";
 import fs from "fs";
+dotenv.config();
+
+import { createConnection } from "./db";
+createConnection();
 
 var privateKey = fs.readFileSync('ssl/server.key', 'utf8');
 var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
 var credentials = { key: privateKey, cert: certificate };
 
 
-dotenv.config();
 
 const { logger } = require("./logger")
 

@@ -13,6 +13,7 @@
     "#############": "end_process_2",
     "all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,application\" -c \"blue.bold,red.bold,\" \"npm run build_watch\" \"npm run dev\"",
     "prod": "node ./dist/app.js",
+    "seed": "node ./seed/index.js",
     "build": "tsc"
   },
   "keywords": [],
@@ -20,19 +21,21 @@
   "license": "ISC",
   "dependencies": {
     "@types/joi": "^17.2.3",
+    "@types/mongoose": "^5.11.97",
     "@types/mysql": "^2.15.18",
     "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "joi": "^17.4.0",
+    "mongoose": "^5.12.15",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.2",
+    "typescript": "^4.3.4",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.12",
-    "@types/node": "^15.12.2"
+    "@types/node": "^15.12.4"
   }
 }

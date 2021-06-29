@@ -1,4 +1,6 @@
 import cars from "./data.json"
+import mongoose from "mongoose";
+import { CarsSchema } from "../../mode.car";
 
 const [first] = cars;
 type ICar = typeof first
@@ -8,8 +10,9 @@ function addCar(car: ICar) {
     globalCars.push(car)
 }
 
-function getCars(): Array<ICar> {
-    return globalCars;
+async function getCars() {
+    const result = await CarsSchema.find();
+    return result;
 }
 
 export { getCars, addCar }
