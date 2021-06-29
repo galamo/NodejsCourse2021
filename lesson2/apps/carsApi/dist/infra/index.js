@@ -9,10 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.addEntryPoint = exports.wrapWithLogs = void 0;
+const logger_1 = require("../logger");
 function wrapWithLogs(fn) {
     return function (req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("request Started", req.path);
+            logger_1.logger.info(`request Started ${req.path}`);
             const start = Date.now();
             yield fn(req, res, next);
             const end = Date.now();
@@ -20,6 +22,7 @@ function wrapWithLogs(fn) {
         });
     };
 }
+exports.wrapWithLogs = wrapWithLogs;
 function addEntryPoint(router, entry) {
     const { path, callbacks, methodType } = entry;
     const last = callbacks[callbacks.length - 1];
@@ -30,4 +33,4 @@ function addEntryPoint(router, entry) {
     const wrappedLogs = wrapWithLogs(last);
     router[methodType](path, [...callbacksWithoutLast, wrappedLogs]);
 }
-module.exports = { addEntryPoint, wrapWithLogs };
+exports.addEntryPoint = addEntryPoint;

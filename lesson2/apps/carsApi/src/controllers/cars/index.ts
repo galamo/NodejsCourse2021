@@ -12,4 +12,6 @@ function getCars(): Array<ICar> {
     return globalCars;
 }
 
+
+
 export { getCars, addCar }

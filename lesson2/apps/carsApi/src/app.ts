@@ -10,7 +10,7 @@ logger.info({ message: "starting application" })
 const app = express();
 
 app.use(getRequestId);
-
+app.use("/healthcheck", (req, res, next) => { res.send("api is working") });
 app.use("/cars", carsRouter);
 
 app.use((error, req: any,

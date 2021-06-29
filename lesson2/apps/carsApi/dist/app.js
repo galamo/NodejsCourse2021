@@ -26,36 +26,16 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const utils_1 = require("./utils/");
 const index_1 = require("./routes/cars/index");
-// import routerCars from "./routes/cars/index"
 dotenv.config();
 const { logger } = require("./logger");
 logger.info({ message: "starting application" });
 const app = express_1.default();
-function getRequestId(req, res, next) {
-    req.requestId = utils_1.uuidv4();
-    next();
-}
-app.use((req, res, next) => {
-    console.log("reqeust started", req.url);
-    next();
-});
-app.use(getRequestId);
-// app.use((req, res, next) => {
-//     console.log(`Request Started ${req.url}`)
-//     req.requestId = getRequestId()
-//     next();
-// })
+app.use(utils_1.getRequestId);
+app.use("/healthcheck", (req, res, next) => { res.send("api is working"); });
 app.use("/cars", index_1.carsRouter);
-// app.use((req, res, next) => {
-//     console.log(`Request finished ${req.url}`)
-//     res.send((req as any).message)
-// })
 app.use((error, req, res, next) => {
-    console.log(error);
-    if (req.isBadReuqest)
-        res.status(400).json({ message: "Bad request", requestId: req.requestId });
-    res.status(500).json({ message: "something error", requestId: req.requestId });
+    if (error.isBadReuqest)
+        return res.status(400).json({ message: "Bad request", requestId: req.requestId });
+    return res.status(500).json({ message: "something error", requestId: req.requestId });
 });
-// app.use("/users", carsRouter);
-// app.use("/mm", carsRouter);
 app.listen(process.env.PORT);

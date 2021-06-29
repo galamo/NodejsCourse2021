@@ -5,10 +5,15 @@ function uuidv4(): string {
     });
 }
 
+function lbsToKg(lbs: number) {
+    if (typeof lbs !== 'number') throw new Error()
+    return lbs * 0.5;
+}
+
 function getRequestId(req, res, next) {
     req.requestId = uuidv4();
     next();
 }
 
 
-export { uuidv4, getRequestId }
+export { uuidv4, getRequestId, lbsToKg }
