@@ -155,4 +155,60 @@ Names can be fetched from: https://randomuser.me/
 
 
 # Secure Code 
-1. 
+
+
+# Mysql
+`npm i --save-dev types/mysql2#`
+`npm i  mysql2`
+`import mysql from "mysql2/promise";`
+
+
+
+# Configure
+- connection
+```js
+const pool = mysql.createPool({
+    connectionLimit: 10,
+    host: 'localhost',
+    user: 'root',
+    password: 'admin',
+    database: 'northwind'
+});
+```
+
+- docker-compose
+
+```yml
+version: "3.7"
+
+services:
+   mysql:
+    image: mysql:5.7
+    container_name: mysql-dev
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - "./mysql:/docker-entrypoint-initdb.d/:ro"
+
+networks:
+  default:
+    name: dev_network
+
+```
+
+```js
+connection.execute(
+  'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
+  ['Rick C-137', 53],
+  function(err, results, fields) {
+    console.log(results); 
+  }
+```
+
+
+## Next Lesson
+- post a customer
+- integration tes
+- seperate controller and queries 

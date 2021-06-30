@@ -10,5 +10,10 @@ function getRequestId(req, res, next) {
     next();
 }
 
+function lbsToKG(lbs: number): number {
+    if (typeof lbs !== 'number') throw new Error()
+    return lbs * 0.5
 
-export { uuidv4, getRequestId }
+}
+
+export { uuidv4, getRequestId, lbsToKG }

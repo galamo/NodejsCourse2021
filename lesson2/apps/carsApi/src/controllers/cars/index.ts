@@ -1,5 +1,6 @@
 import cars from "./data.json"
 
+
 const [first] = cars;
 type ICar = typeof first
 

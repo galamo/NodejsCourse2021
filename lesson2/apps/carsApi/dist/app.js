@@ -26,12 +26,17 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const utils_1 = require("./utils/");
 const index_1 = require("./routes/cars/index");
+const customers_1 = require("./routes/customers");
 dotenv.config();
 const { logger } = require("./logger");
 logger.info({ message: "starting application" });
 const app = express_1.default();
 app.use(utils_1.getRequestId);
+app.get("/healthcheck", (req, res) => {
+    res.send("I am Alive!");
+});
 app.use("/cars", index_1.carsRouter);
+app.use("/customers", customers_1.customersRouter);
 app.use((error, req, res, next) => {
     if (error.isBadReuqest)
         return res.status(400).json({ message: "Bad request", requestId: req.requestId });

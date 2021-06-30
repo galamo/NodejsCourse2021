@@ -1,5 +1,7 @@
 import { getCars } from "../../controllers/cars";
 export const handler = async (req, res, next) => {
-    console.log("inside entry point ")
+    const { carType } = req.query;
+    if (carType === "mazda") return res.json([])
+    console.log("inside entry point")
     return res.json(getCars())
 }

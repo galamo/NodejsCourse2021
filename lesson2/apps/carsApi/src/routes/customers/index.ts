@@ -1,8 +1,7 @@
 import express from "express";
-import { validate } from "../../utils/validations";
 import { addEntryPoint } from "../../infra"
 import { handler } from "./handlers";
-const carsRouter = express.Router();
+const customersRouter = express.Router();
 
 
 const entries = [
@@ -10,23 +9,20 @@ const entries = [
         name: "carsEntry",
         path: "/",
         methodType: "get",
-        callbacks: [validate, handler]
+        callbacks: [handler]
     },
-    {
-        name: "carsEntry",
-        path: "/",
-        methodType: "post",
-        callbacks: [validate, (req, res, next) => { return res.send("POST") }]
-    }
+
 ]
 export type IEntry = typeof entries[0];
 
 function init() {
     entries.forEach((entry: IEntry) => {
-        addEntryPoint(carsRouter, entry)
+        addEntryPoint(customersRouter, entry)
     });
 }
 init();
 
-export { carsRouter }
+
+
+export { customersRouter }
 // export default carsRouter;
