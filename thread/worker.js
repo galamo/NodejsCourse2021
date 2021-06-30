@@ -1,11 +1,10 @@
 const { parentPort, workerData } = require("worker_threads");
 
+const ultimateIterations = 9999999999;
 parentPort.postMessage(longCalc())
 
-const ultimateIterations = 9999999999;
 function longCalc() {
-    for (let index = 0; index < 999; index++) {
-        console.log("Executed in the Child thread");
+    for (let index = 0; index < ultimateIterations; index++) {
     }
     return "message from worker";
 }
