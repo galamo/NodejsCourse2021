@@ -212,3 +212,25 @@ connection.execute(
 - post a customer
 - integration tes
 - seperate controller and queries 
+
+
+## Open issues 
+- Try and Catch in Unit test
+- Running API tests
+
+
+
+## Homework
+Before - make sure to load the sql scripts in your local database.
+- install docker 
+- go to dev-apps folder and run  `docker-compose up` 
+1. Cover your server functionality writing with Unit Test
+2. Create Api with the following functionality 
+2.1 GET /products 
+return the all products from products table
+2.3 GET /products/:category
+2.4 return the products by category
+2.5 GET /orders?tax_rate=:number
+2.6 return all the orders which higher then the given tax rate ( convert the tax to $)
+3. Cover the Api's with integration test
+4. print all the incoming payload 
