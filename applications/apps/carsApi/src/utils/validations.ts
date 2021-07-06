@@ -2,6 +2,7 @@ import { carsSchema } from "../routes/cars/validations"
 
 const schemas = {
     "/cars": carsSchema,
+
     // "/users": usersSchema
 }
 

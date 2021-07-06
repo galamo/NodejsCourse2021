@@ -1,8 +1,8 @@
 import joi from "joi";
 
 
-export const carsSchema = joi.object({
-    query: joi.object({
-        // customer: joi.string().required()
+export const customerSchema = joi.object({
+    params: joi.object({
+        city: joi.string().required()
     })
 })

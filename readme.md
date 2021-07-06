@@ -234,3 +234,11 @@ return the all products from products table
 2.6 return all the orders which higher then the given tax rate ( convert the tax to $)
 3. Cover the Api's with integration test
 4. print all the incoming payload 
+
+
+
+# Integration tests
+## Common issues
+  1. par
+  2. gar
+

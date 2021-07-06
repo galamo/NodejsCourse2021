@@ -4,15 +4,23 @@ import * as dotenv from "dotenv"
 import { getRequestId } from "./utils/"
 import { carsRouter } from "./routes/cars/index"
 import { customersRouter } from "./routes/customers";
+import { commonMiddlewares } from "./commonMiddlewares";
+
+
+
 dotenv.config();
 const { logger } = require("./logger")
+
+
+
 
 logger.info({ message: "starting application" })
 const app = express();
 
 app.use(getRequestId);
-
+app.use(...commonMiddlewares)
 app.get("/healthcheck", (req, res) => {
+    // @ts-ignore
     res.send("I am Alive!")
 })
 app.use("/cars", carsRouter);

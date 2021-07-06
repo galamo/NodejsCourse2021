@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { uuidv4, lbsToKG } = require("../../dist/utils/index")
-
+const { getEmailAddress } = require("../../dist/controllers/customers")
 describe("Test uuidv4 function", () => {
     const value = uuidv4();
     it("Length of requestId is correct", () => {
@@ -23,4 +23,18 @@ describe("Test lbsToKg function", () => {
         expect(lbsToKG.bind([])).to.throw()
     })
 })
+
+
+
+describe("Email Unit test", () => {
+    it("Should return valid email", () => {
+        const value = getEmailAddress("gal", "a", "yahoo")
+        expect(value).to.be.equals("gal_a@yahoo.com")
+    })
+    it("Should return Undefined", function () {
+        const value = getEmailAddress("gal", null, "yahoo")
+        expect(value).to.be.equals(undefined)
+    })
+})
+
 
