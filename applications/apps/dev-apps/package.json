@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "__all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,carsApi,countriesApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run build\" \"npm run run_app1\" \"npm run run_app2\"",
-    "all": "concurrently -k -p \"[{name}]\" -n \"carsApi,countriesApi,buildCarsApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run run_app1\" \"npm run run_app2\" \"npm run build\"",
+    "__all": "concurrently -k -p \"[{name}]\" -n \"TypescriptCompiler,carsApi,productsApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run build\" \"npm run run_app1\" \"npm run run_app2\"",
+    "all": "concurrently -k -p \"[{name}]\" -n \"carsApi,productsApi,buildCarsApi\" -c \"red.bold,blue.bold,yellow.bold,\" \"npm run run_app1\" \"npm run run_app2\" \"npm run build\"",
     "build": "cd ../carsApi ; npm run build_watch",
     "run_app1": "cd ../carsApi ; npm run dev-ts",
-    "run_app2": "cd ../countriesApi ; npm run dev"
+    "run_app2": "cd ../productsApi ; npm run dev"
   },
   "keywords": [],
   "author": "",

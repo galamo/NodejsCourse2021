@@ -249,7 +249,16 @@ return the all products from products table
   1. parallel
   2. garbich data 
 
+# Passport
+```js
+ app.get('/checkAuth', ensureAuthenticated, function (req, res) {
+  res.json({ message: "yes we made it!!!" })
+});
+```
 
+
+
+# JWT
 ## Microservices
 1. Flow and explanation
 2. Example - Http
@@ -336,4 +345,26 @@ function getCustomerValues(randomCity) {
 }
 
 
+```
+
+
+```js
+const authMiddleware = (req, res, next) => {
+    const authorizationHeader = req.header('Authorization');
+    console.log(authorizationHeader)
+    jwt.verify(authorizationHeader, "process.env.SECRET", function (err, decoded) {
+
+        if (err) {
+            console.log(err)
+            return res.status(401).send("UnAuthorized")
+        }
+        req.isAdmin = decoded.isAdmin;
+        return next();
+
+    })
+}
+function verifyIsAdmin(req, res, next) {
+    if (req.isAdmin) return next();
+    return res.send("Not Authorized")
+}
 ```
