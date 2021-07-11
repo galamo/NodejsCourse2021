@@ -15,13 +15,41 @@ app.get('/', function (req, res) {
 // before creating a token, but for simplicity accessing this route
 // will generate a new token that is valid for 2 minutes
 app.get('/login', function (req, res) {
-    const token = jwt.sign({ isAdmin: false, username: req.query.userName }, "process.env.SECRET", { expiresIn: 120 });
+    const token = jwt.sign({ isAdmin: true, username: req.query.userName },
+        process.env.SECRET, { expiresIn: 400 });
     res.send(token)
 })
 
+function authorizationMiddleware(req, res, next) {
+    const headerAuth = req.headers.authorization;
+    if (headerAuth) {
+        jwt.verify(headerAuth, process.env.SECRET, (err, decoded) => {
+            if (err) {
+                console.log(err)
+                return res.status(401).send("UnAuthorized")
+            }
+            const { isAdmin } = decoded;
+            req.isAdmin = isAdmin;
+            return next();
+        })
+
+    }
+    else res.status(401).send("UnAuthorized")
+}
+
+function isAdmin(req, res, next) {
+    if (req.isAdmin) return next();
+    return res.status(401).send("You are not Admin!!")
+}
+function wrapper(param) {
+    //add more logic
+    return function isAdmin(req, res, next) {
+        // compare to param
+    }
+}
 
 // Register a route that requires a valid token to view data //authMiddleware, verifyIsAdmin
-app.get('/products', function (req, res) {
+app.get('/products', authorizationMiddleware, isAdmin, function (req, res) {
     res.json({ product: "insuranceMountain", loginBy: "id", userName: "Gal", totalBalance: 1002 })
 })
 

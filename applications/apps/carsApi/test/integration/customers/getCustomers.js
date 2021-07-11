@@ -5,18 +5,38 @@ const { PORT, BASE_URL } = process.env
 const { getConnection } = require("../../../dist/db/index")
 
 
-let randomCity = `city_${Math.ceil(Math.random() * 99999)}`
+const randomCity = `city_${Math.ceil(Math.random() * 99999)}`
+const randomName = `Gal_${Math.ceil(Math.random() * 99999)}`;
+const numberOdRecords = [getInsertQuery, getInsertQuery, getInsertQuery]
 before(async () => {
+
     const connection = getConnection();
-    await connection.execute(getInsertQuery(), [...getCustomerValues(randomCity)])
-    await connection.execute(getInsertQuery(), [...getCustomerValues(randomCity)])
+    numberOdRecords.forEach(async (func) => {
+        await connection.execute(getInsertQuery(), [...getCustomerValues(randomCity)])
+    })
 })
 
 
 describe("/api/customers/:city", () => {
-    it("return ok", async () => {
+    it("validate customers result", async () => {
         const { data } = await axios.get(`http://${BASE_URL}:${PORT}/customers/${randomCity}`)
+        expect(data.length).to.be.equals(numberOdRecords.length)
+        const cities = data.map(customer => customer.city)
+        const [firstCity] = cities;
+        expect(firstCity).to.be.equals(randomCity)
 
+    })
+})
+
+describe("/api/customers/:name", () => {
+    it("validate customers result", async () => {
+        // const { data } = await axios.get(`http://${BASE_URL}:${PORT}/customers/${randomName}`)
+        // expect(data.length).to.be.equals(numberOdRecords.length)
+        // const cities = data.map(customer => customer.city)
+        // const [firstCity] = cities;
+        const customer = { randomName }
+        expect(customer.randomName).to.be.equals(randomName)
+        expect(customer.randomName.length).to.be.equals(randomName.length)
     })
 })
 

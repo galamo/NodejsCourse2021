@@ -10,6 +10,20 @@ services:
       MYSQL_ROOT_PASSWORD: admin
     volumes:
       - "./mysql:/docker-entrypoint-initdb.d/:ro"
+   rabbitmq-master:
+    image: rabbitmq:3.8-management
+    container_name: rabbitmq-master
+    hostname: rabbitmq-master
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
+      - 25672:25672
+       
 
 networks:
   default:
